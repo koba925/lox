@@ -30,3 +30,28 @@ var c = "global c";
 print a;
 print b;
 print c;
+
+// if
+if (true) print "if-true"; else print "if-false";
+if (false) print "if-true"; else print "if-false";
+print "hi" or 2;
+print nil or "yes";
+print "hi" and 2;
+print nil and "yes";
+
+// while
+var i = 0;
+while (i < 3) {
+    print i;
+    i = i + 1;
+}
+
+// for by Fibonacci
+var a = 0;
+var temp;
+
+for (var b = 1; a < 10000; b = temp + b) {
+  print a;
+  temp = a;
+  a = b;
+}
