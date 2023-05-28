@@ -26,7 +26,7 @@ public class Lox {
 
     private static void runFile(String path) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(path));
-        run(new String(bytes, Charset.defaultCharset()));
+        run(new String(bytes, "UTF-8")); // Charset.defaultCharset()
         if (hadError) System.exit(65);
         if (hadRuntimeError) System.exit(70);
     }
@@ -48,11 +48,11 @@ public class Lox {
         Scanner scanner = new Scanner(source);
         List<Token> tokens = scanner.scanTokens();
         Parser parser = new Parser(tokens);
-        Expr expression = parser.parse();
+        List<Stmt> statements = parser.parse();
 
         if (hadError) return;
 
-        interpreter.interpret(expression);
+        interpreter.interpret(statements);
     }
 
     static void error(int line, String message) {
@@ -68,7 +68,7 @@ public class Lox {
         if (token.type == TokenType.EOF) {
             report(token.line, " at end", message);
         } else {
-            report(token.line, "at '" + token.lexeme + "'", message);
+            report(token.line, " at '" + token.lexeme + "'", message);
         }
     }
 
