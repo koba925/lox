@@ -105,3 +105,37 @@ fun makeCounter() {
 var counter = makeCounter();
 counter(); // "1".
 counter(); // "2".
+
+// Shadowing
+var a = "outer";
+{
+  var a = "inner";
+  print a;
+}
+
+var a = "outer";
+{
+  print a;
+  var a = "inner";
+}
+
+// Should print "global" "global"
+var a = "global";
+{
+  fun showA() {
+    print a;
+  }
+
+  showA();
+  var a = "block";
+  showA();
+}
+
+// Resolution Errors
+fun bad() {
+  var a = "first";
+//  var a = "second";
+}
+
+// Invalid return
+// return "at top level";
